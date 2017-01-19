@@ -5,6 +5,7 @@ class PizzaServer
   # List pizzas
   def pizzas
     response = self.class.get("/pizzas")
+    readable_json(response)
   end
 
   # Create a pizza
