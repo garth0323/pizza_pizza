@@ -1,0 +1,16 @@
+.container
+  .list
+    %h1= @pizza["name"]
+    %h4= "Description: #{@pizza['description']}"
+    = form_tag '/pizzas/add_topping', method: 'post', :class => 'form-inline' do
+      .form-group
+        = text_field_tag :topping,params[:topping], class: 'form-control', placeholder: "Topping", autofocus: true
+        = hidden_field_tag :pizza_id,  @pizza["pizza_id"]
+        = hidden_field_tag :name,  @pizza["name"]
+        = hidden_field_tag :description,  @pizza["description"]
+      %button.btn.btn-default{:type => "submit"} Add Topping
+    - unless @toppings.nil?
+      %ul.list-group
+      - @toppings.each do |topping|
+        %li.list-group-item
+          = topping["name"]

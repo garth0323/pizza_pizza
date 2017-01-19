@@ -1,0 +1,18 @@
+.container
+  .list
+    %h1 List of Pizzas
+    %p.lead
+      Click on a pizza to see topping on pizza.
+      %br/
+      Or create your very own in this form
+    = form_tag '/pizzas/new', method: 'post', :class => 'form-inline' do
+      .form-group
+        = text_field_tag :name,  params[:name], class: 'form-control', placeholder: "Name"
+        = text_field_tag :description,  params[:description], class: 'form-control', placeholder: "Description"
+      %button.btn.btn-default{:type => "submit"} Create Pizza
+    .list-group
+    - @pizzas.each do |pizza|
+      %a.list-group-item{:href => pizza_path(pizza_id: "#{pizza['id']}", name: "#{pizza['name']}", description: "#{pizza['description']}")}
+        = pizza['name'] 
+        .pull-right
+          = pizza['description']
